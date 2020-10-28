@@ -10,37 +10,12 @@
     height: 100vh;
     display: grid;
     grid-template-rows: 70px 20px 1fr 20px 50px;
-    background: rgb(28, 36, 66);
 }
 
 header{
-    background: rgb(21, 27, 48);
+    
 }
 
-nav{
-    height: 100%;
-    display: grid;
-    grid-template-columns: 100px 1fr 300px;
-    align-items: center;
-}
-
-nav > a{
-    justify-self: center;
-}
-
-nav > div{
-    grid-column: 3;
-    display: flex;
-    height: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.nav-item{
-    display: block;
-    text-decoration: none;
-    color: #fff;
-}
 
 footer{
     grid-row: 5;
