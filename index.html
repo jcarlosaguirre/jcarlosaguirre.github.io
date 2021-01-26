@@ -4,19 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>JamesCharles-AC | Home</title>
+    <script src="./js/someAnimations.js"></script>
+    <title>Welcome</title>
 </head>
 <body>
     <div id="app">
-        <header>
-            
-        </header>
-        <main>
-
-        </main>
-        <footer>
-            
-        </footer>
+        <div class="container" :class="{ open: openMenu }">
+            <nav>
+                <div class="menu-btn" @click="showMenu">
+                    <div class="burger-line"></div>
+                </div>
+                <div class="links">
+                    <a id="home-link" class="hidden" @click="showSection(0)">Home</a>
+                    <a id="about-link" class="hidden" @click="showSection(1)">About</a>
+                    <a id="projects-link" class="hidden" @click="showSection(2)">Projects</a>
+                </div>
+            </nav>
+            <main>
+                <div class="decoration1">
+                    <div class="backlight"></div>
+                    <div class="eclipse-2"></div>
+                    <div class="eclipse"></div>
+                    <p class="title1" :class="{ show: homeSection }"> Juan Carlos Aguirre </p>
+                    <p class="title2" :class="{ show: homeSection }"> PORTFOLIO </p>
+                </div>
+                <section id="about" :class="{ show: aboutSection }">
+                    <div class="separator"></div>
+                    <div class="content">
+                        <div class="top">
+                            <ul>
+                                <li v-for="(link, index) in aboutLinks" @click="activeInfo('about', index)">
+                                    {{ link.title }} 
+                                    <span :class="{ active: link.active }"> &rsaquo; </span>
+                                </li>
+                            </ul>
+                            <img id="profilePhoto" src="./assets/img/foto.jpg" alt="profile">
+                        </div>
+                        <div class="info-section">
+                            <div id="biography" :class="{ hidden: !aboutLinks[0].active }">
+                                <p>
+                                    Hi! My name is <span class="name">Juan Carlos</span>, and I am a young developer who wants to 
+                                    learn everything, as far as possible, about software and web development. 
+                                </p>
+                                <br>    
+                                <p>
+                                    Finishing my Higher Education (CFGS in Spain) in <span>Web Applications Development</span>, 
+                                    I consider myself a full-stack developer. 
+                                </p>
+                                <br>
+                                <p>
+                                    I've learned a lot, and now I'm looking for some challenges in a professional environment. Take a look
+                                    at my <span>skills</span>! 
+                                </p>
+                            </div>
+                            <div id="languages" :class="{ hidden: !aboutLinks[1].active }">
+                                <div v-for="language in languages">
+                                    <p>{{ language.lang }}</p>
+                                    <span v-for="point in language.points">
+                                        &#9830;
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="skills" :class="{ hidden: !aboutLinks[2].active }">
+                                <div v-for="skill in skills">
+                                    <img :src="skill.src" :alt="skill.text" >
+                                    <p>{{ skill.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="projects" :class="{ show: projectsSection }">
+                    <div class="separator"></div>
+                    <div class="content">
+                    </div>
+                </section>
+            </main>
+            <footer></footer>
+        </div>
     </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./js/vue.js"></script>
 </body>
 </html>
