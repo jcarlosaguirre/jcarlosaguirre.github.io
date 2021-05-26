@@ -1,0 +1,38 @@
+#app{
+    height: 100vh;
+    background: #181e5fc2;
+    white-space: pre-line;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+   
+*::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(105, 145, 163);
+    border-radius: 0 5px 5px 0;
+}
+
+*::-webkit-scrollbar:hover -webkit-scrollbar-thumb {
+    
+    background-color: rgb(70, 153, 192);
+}
+
+.primary-color{
+    background: #402f9ac2 !important;
+}
+
+.primary-color:hover{
+    background: #181e5fc2 !important;
+}
+
+#profilePhoto{
+    width: 30%;
+    height: 30%;
+    max-width: 230px;
+    shape-outside: circle();
+}

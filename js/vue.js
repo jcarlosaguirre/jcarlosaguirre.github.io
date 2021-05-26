@@ -8,7 +8,27 @@ const vueApp = {
             openMenu: false,
 
             // Active or deactivate home
-            homeSection: false,
+            section: "Home",
+
+            content: {
+                home:{
+                    title:  "Welcome to my resume!",
+                    text1:  "This site is open to anyone looking for some information about me." + "\n" +
+                            "It could also be that you ended up here by accident, but take a look and maybe you will be interested in me (in a professional way, of course).",
+                    section1Title: "Know my skills",
+                    section1Text: "Here you will find which technologies I am in, which ones I have basic knowledge on and which ones make me curious to learn.",
+                    section2Title: "Visit my Github repository",
+                    section2Text: "and find in which projects I'm working on (maybe none right now, at the moment).",
+                }
+            },
+
+            hola: true,
+
+            buttons:{
+                tellMeMore: "Tell me more!",
+                bringMeThere: "Bring me there!",
+                takeALook: "Let's take a look",
+            },
 
             // Decorative section separators (filled in 'mounted' hook)
             separators: [],
@@ -178,6 +198,7 @@ const vueApp = {
             // this.homeSection = true;
         }, 50);
 
+        console.log( window );
     },
 };
 
