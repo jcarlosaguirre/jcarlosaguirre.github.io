@@ -22,6 +22,12 @@
     background-color: rgb(70, 153, 192);
 }
 
+#main-container{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+}
+
 .primary-color{
     background: #402f9ac2 !important;
 }

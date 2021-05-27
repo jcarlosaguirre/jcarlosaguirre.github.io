@@ -4,8 +4,12 @@ const vueApp = {
 
         return{
 
-            // Show or hide the menu
-            openMenu: false,
+            links: [
+                { title: "Home", disabled: false },
+                { title: "About me", disabled: false },
+                { title: "Skills", disabled: false },
+                { title: "Projects", disabled: false },
+            ],
 
             // Active or deactivate home
             section: "Home",
