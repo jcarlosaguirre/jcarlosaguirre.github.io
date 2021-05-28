@@ -33,7 +33,7 @@
             <main>
               <header class="px-4 py-3 mb-4 border-bottom">
                 <div class="d-flex align-items-center text-dark text-decoration-none">
-                  <i id="header-icon" class="fas fa-home fa-lg" :hola="icons[section]"></i>
+                  <i id="header-icon" class="fas fa-home fa-lg"></i>
                   <span class="fs-4 ps-2">{{ section }}</span>
                 </div>
               </header>
@@ -86,28 +86,6 @@
                           <span class="pe-2">{{ buttons.contactMe }}</span>
                           <i class="fas fa-chevron-right fa-sm"></i>
                         </button>
-                        
-                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                          <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                          </div>
-                          <div class="offcanvas-body">
-                            <div>
-                              Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                            </div>
-                            <div class="dropdown mt-3">
-                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                                Dropdown button
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
                     </div>
                     <img id="profilePhoto" src="assets/img/foto.jpg" alt="profile_photo" class="d-none d-md-inline-block ms-3 align-self-start align-self-lg-center rounded-circle img-thumbnail">
                   </div>
@@ -135,8 +113,34 @@
                     </div>
                   </div>
               </div>
+              
             </main>
                 
+                 
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contact information</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <hr />
+              <div class="offcanvas-body">
+                <table class="ms-3">
+                  <tr>
+                    <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-envelope-open-text fa-lg"></i></td>
+                    <td class="pb-3"><span>juancarlos.aguirrecortes@gmail.com</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-mobile-alt fa-lg"></i></td>
+                    <td class="pb-3"><span>(+34) 637 93 58 64</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-map-marker-alt fa-lg"></i></td>
+                    <td class="pb-3"><span>Paiporta, Valencia (Spain)</span></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
             <footer class="p-2 text-muted border-top text-center bg-dark text-dark">
               Juan Carlos Aguirre Cortés © 2021
             </footer>

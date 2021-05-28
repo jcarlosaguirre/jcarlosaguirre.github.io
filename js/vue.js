@@ -123,6 +123,19 @@ const vueApp = {
             
         },
 
+        copyText( event ){
+
+            console.log( event.target.innerText );
+            var copyText = event.target;
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy", false, text );
+        },
+
         // Animate a delimiter or another based on chosen section
         animateSeparator( section ){
 

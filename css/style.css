@@ -42,3 +42,7 @@
     max-width: 230px;
     shape-outside: circle();
 }
+
+.list-style-none{
+    list-style: none !important;
+}
