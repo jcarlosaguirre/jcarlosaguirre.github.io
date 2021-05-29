@@ -4,6 +4,7 @@ const vueApp = {
 
         return{
 
+            // Navbar elements
             links: [
                 { title: "Home", value: 0, disabled: false },
                 { title: "About me", value: 1, disabled: false },
@@ -11,8 +12,7 @@ const vueApp = {
                 { title: "Projects", value: 3, disabled: false },
             ],
 
-            iconIndex: 0,
-
+            // Titles icons
             icons: [
                 'fa-home',
                 'fa-user',
@@ -22,6 +22,7 @@ const vueApp = {
             // Active or deactivate home
             section: "Home",
 
+            // Titles and texts of different sections
             content: {
                 home:{
                     title:  "Welcome to my resume!",
@@ -50,20 +51,19 @@ const vueApp = {
                 },
             },
 
-            personalInformation: [
-                true, false, false
-            ],
-
+            // Studies
             education:[
                 { place: "IES La Sénia, Paiporta (Spain)", title: "Certificate of Higher Education (HNC)", type: "Software and Web development", date: "2019 - 2021" },
                 { place: "IES La Sénia, Paiporta (Spain)", title: "Vocational Education and Training (VET)", type: "IT & Computer Skills", date: "2018 - 2019" }
             ],
 
+            // Working experience
             experience:[
                 { place: "Ardis Software", title: "Training period", type: "Web & Angular developer", date: "Jan. - Jun. 2021" },
                 { place: "EMO - Especialistas en ortopedia", title: "Training period", type: "IT & PHP Programmer", date: "Mar. - Jun. 2019" }
             ],
 
+            // Buttons text
             buttons:{
                 tellMeMore: "Tell me more!",
                 bringMeThere: "Bring me there!",
@@ -74,39 +74,6 @@ const vueApp = {
                 contactMe: "Contact info"
             },
 
-            // Decorative section separators (filled in 'mounted' hook)
-            separators: [],
-
-            // Active or deactivate sections
-            aboutSection: true,
-
-            // Links of info in about section
-            aboutLinks: [
-                {title: "Biography", active: true},
-                {title: "Languages", active: false},
-                {title: "Skills", active: false},
-            ],
-
-            // List of languages and level in about section
-            languages: [
-                {lang: "English", points: 4},
-                {lang: "Spanish", points: 5},
-                {lang: "Catalan", points: 3},
-            ],
-
-            // List of skills with images and name
-            skills: [
-                {src: "./assets/icons/js-icon.png", text: "JavaScript"},
-                {src: "./assets/icons/php-icon.png", text: "PHP"},
-                {src: "./assets/icons/java-icon.png", text: "Java"},
-                {src: "./assets/icons/vue-icon.png", text: "Vue.js"},
-                {src: "./assets/icons/node-icon.png", text: "Node.js"},
-                {src: "./assets/icons/angular-icon.png", text: "Angular"},
-                {src: "./assets/icons/docker-icon.png", text: "Docker"},
-                {src: "./assets/icons/vm-icon.png", text: "Virtual Box"},
-            ],
-
-            projectsSection : false,
         }
     },
     methods:{
@@ -142,27 +109,6 @@ const vueApp = {
             
         },
 
-        showPersonalInfo( index ){
-
-            this.personalInformation.fill(false)
-            this.personalInformation[ index ] = true;
-            switch (index) {
-                case 0:
-                    this.content.about.title = "A little about me"
-                    break;
-                    
-                case 1:
-                    this.content.about.title = "Education"
-                    break;
-                    
-                case 2:
-                    this.content.about.title = "Experience"
-                    break;
-            }
-
-            console.log( this.personalInformation );
-        },
-
         copyText( event ){
 
             console.log( event.target.innerText );
@@ -178,14 +124,6 @@ const vueApp = {
 
     },
     mounted(){
-
-        // Get separators from sections
-        this.separators = document.getElementsByClassName("separator");
-
-        // On first load, wait to show home texts
-        setTimeout( () =>{
-            // this.homeSection = true;
-        }, 50);
 
         console.log( window );
     },
