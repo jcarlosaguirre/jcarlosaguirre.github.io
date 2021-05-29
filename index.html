@@ -24,6 +24,9 @@
                         <a @click="setSection( link.value )" class="nav-link" aria-current="page" href="#" :class="{disabled: link.disabled, 'ms-auto': link.end}">{{ link.title }}</a>
                       </li>
                       <li class="nav-item flex-fill text-md-end">
+                        <a class="nav-link" aria-current="page" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">{{ buttons.contact }}</a>
+                      </li>
+                      <li class="nav-item text-md-end">
                         <a class="nav-link disabled" aria-current="page" href="#" >Pay me a coffee?</a>
                       </li>
                     </ul>
@@ -41,14 +44,11 @@
                   <div class="p-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
                     <div class="d-inline-block col">
                         <h1 class="display-6 fw-bold">{{ content.home.title }}</h1>                      
-                        <p class=" fs-5">
-                          {{ content.home.text1 }}
-                          <br/>
-                          <button class="btn btn-primary primary-color border-0 mt-3" type="button" @click="setSection(1)">
-                            <span class="pe-2">{{ buttons.tellMeMore }}</span>
-                            <i class="fas fa-chevron-right fa-sm"></i>
-                          </button>
-                        </p>
+                        <p class="fs-5" v-html="content.home.text1"></p>
+                        <button class="btn btn-primary primary-color border-0 mt-3" type="button" @click="setSection(1)">
+                          <span class="pe-2">{{ buttons.tellMeMore }}</span>
+                          <i class="fas fa-chevron-right fa-sm"></i>
+                        </button>
                     </div>
                     <img id="profilePhoto" src="assets/img/foto.jpg" alt="profile_photo" class="d-none d-md-inline-block ms-3 align-self-start align-self-lg-center rounded-circle img-thumbnail">
                   </div>
@@ -58,7 +58,7 @@
                       <div class="h-100 p-5 text-white bg-dark rounded-3">
                         <h2>{{ content.home.section1Title }}</h2>
                         <p>{{ content.home.section1Text }}</p>
-                        <button class="btn btn-outline-light" type="button">
+                        <button class="btn btn-outline-light" type="button" @click="setSection(2)">
                             <span class="pe-2" >{{ buttons.bringMeThere }}</span>
                             <i class="fas fa-chevron-right fa-sm"></i>
                           </button>
@@ -77,25 +77,84 @@
                   </div>
               </div>
               <div id="about" class="container py-4" v-if="section == 'About me'">
-                  <div class="p-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
+
+                  <!-- Presentation -->
+                  <div class="px-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
                     <div class="d-inline-block col">
-                        <h2 class="fw-bold">{{ content.about.title }}</h2>                      
-                        <p class=" fs-6" v-html="content.about.text1"></p>
-                        
-                        <button class="btn btn-primary primary-color border-0 mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                          <span class="pe-2">{{ buttons.contactMe }}</span>
-                          <i class="fas fa-chevron-right fa-sm"></i>
-                        </button>
+                        <div>
+                          <h2 class="fw-bold">{{ content.about.title1 }}</h2>                      
+                          <p class="fs-6 mb-0" v-html="content.about.personal"></p>  
+                        </div> 
+
+                        <div class="d-flex">
+                          <button class="btn btn-primary secondary-color border-0 mt-3 mb-4 me-2" type="button"
+                          data-bs-toggle="collapse" data-bs-target="#collapseExperience" aria-expanded="false" aria-controls="collapseExperience">
+                            <i class="fas fa-briefcase "></i>
+                            <span class="px-2">{{ buttons.experience }}</span>
+                          </button>
+                          <button class="btn btn-primary primary-color border-0 mt-3 mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                            <span class="pe-2">{{ buttons.contactMe }}</span>
+                            <i class="fas fa-chevron-right fa-sm"></i>
+                          </button>
+                        </div>
                     </div>
                     <img id="profilePhoto" src="assets/img/foto.jpg" alt="profile_photo" class="d-none d-md-inline-block ms-3 align-self-start align-self-lg-center rounded-circle img-thumbnail">
                   </div>
+                  
+                  <!-- Education / Experience -->
+                  <div class="collapse" id="collapseExperience">
+
+                    <div class="d-inline-block col-lg-6 m-0 px-5 my-4">
+                      <h2 class="fw-bold">
+                        <i class="fas fa-graduation-cap fa-sm"></i>
+                        {{ content.about.title2 }}
+                      </h2> 
+                      <table class="my-4 ms-2" v-for="title in education">
+                        <tr>
+                          <td><i class="far fa-bookmark"></i><span class="ps-4">{{ title.date }}</span></td>
+                          <td class="px-3"><b>{{ title.place }}</b></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td class="px-3"><i><small>{{ title.title }}</small></i></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td class="px-3"><i>{{ title.type }}</i></td>
+                        </tr>
+                      </table>   
+                    </div> 
+
+                    <div class="d-inline-block col-lg-6 m-0 px-5 my-4">
+                      <h2 class="fw-bold">
+                        <i class="fas fa-briefcase fa-sm"></i>
+                        {{ content.about.title3 }}
+                      </h2>  
+                      <table class="my-4 ms-2" v-for="training in experience">
+                        <tr>
+                          <td><i class="far fa-bookmark"></i><span class="ps-4">{{ training.date }}</span></td>
+                          <td class="px-3"><b>{{ training.place }}</b></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td class="px-3"><i><small>{{ training.title }}</small></i></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td class="px-3"><i>{{ training.type }}</i></td>
+                        </tr>
+                      </table> 
+                    </div>
+                  </div>
+                    
+
               
-                  <div class="row align-items-md-stretch">
+                  <div class="pt-4 row align-items-md-stretch">
                     <div class="col-lg-6 offset-lg-1">
                       <div class="h-100 p-5 text-white bg-dark rounded-3">
                         <h2>{{ content.about.section1Title }}</h2>
                         <p>{{ content.about.section1Text }}</p>
-                        <button class="btn btn-outline-light" type="button">
+                        <button class="btn btn-outline-light" type="button" @click="setSection(2)">
                             <span class="pe-2" >{{ buttons.bringMeThere }}</span>
                             <i class="fas fa-chevron-right fa-sm"></i>
                           </button>
@@ -105,10 +164,6 @@
                       <div class="h-100 p-5 bg-white border rounded-3">
                         <h2>{{ content.about.section2Title }}</h2>
                         <p v-html="content.about.section2Text"></p>
-                        <a href="https://github.com/jcarlosaguirre" class="btn btn-outline-dark" type="button">
-                          <i class="fab fa-github fa-lg"></i>
-                          <span class="ps-2">{{ buttons.takeALook }}</span>
-                        </a>
                       </div>
                     </div>
                   </div>
@@ -131,18 +186,22 @@
                   </tr>
                   <tr>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-mobile-alt fa-lg"></i></td>
-                    <td class="pb-3"><span>(+34) 637 93 58 64</span></td>
+                    <td class="pb-3"><span>(+34) 637 ** ** ** <br />- <i>Much better contacting me from email</i></span></td>
                   </tr>
                   <tr>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-map-marker-alt fa-lg"></i></td>
                     <td class="pb-3"><span>Paiporta, Valencia (Spain)</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-flex justify-content-center pb-3 pe-3"><i class="fab fa-linkedin fa-lg"></i></td>
+                    <td class="pb-3"><a href="https://www.linkedin.com/in/jcarlosaguirre" class="text-decoration-none">Juan Carlos Aguirre Cortés</a></td>
                   </tr>
                 </table>
               </div>
             </div>
 
             <footer class="p-2 text-muted border-top text-center bg-dark text-dark">
-              Juan Carlos Aguirre Cortés © 2021
+              Juan Carlos Aguirre Cortés <!-- © --> -  2021
             </footer>
         </div>
     </div>

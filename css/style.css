@@ -32,8 +32,16 @@
     background: #402f9ac2 !important;
 }
 
+.secondary-color{
+    background: #4790ce !important;
+}
+
 .primary-color:hover{
     background: #181e5fc2 !important;
+}
+
+.secondary-color:hover{
+    background: #346896 !important;
 }
 
 #profilePhoto{
