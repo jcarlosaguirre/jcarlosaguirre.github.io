@@ -13,6 +13,8 @@
 <body>
     <div id="app" class="py-sm-3">
         <div id="main-container" class="container rounded overflow-auto h-100 p-0 bg-light">
+
+            <!-- Navbar -->
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <div class="container-fluid">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,28 +22,29 @@
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav flex-fill m-0 mb-2 mb-lg-0">
-                      <li v-for="link in links" class="nav-item" >
+                      <li v-for="link in links" class="nav-item px-1" >
                         <a @click="setSection( link.value )" class="nav-link" aria-current="page" href="#" :class="{disabled: link.disabled, 'ms-auto': link.end}">{{ link.title }}</a>
                       </li>
-                      <li class="nav-item flex-fill text-md-end">
+                      <li class="nav-item px-1">
                         <a class="nav-link" aria-current="page" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">{{ buttons.contact }}</a>
-                      </li>
-                      <li class="nav-item text-md-end">
-                        <a class="nav-link disabled" aria-current="page" href="#" >Pay me a coffee?</a>
                       </li>
                     </ul>
                   </div>
                 </div>
             </nav>
             <main>
+
+              <!-- Main header -->
               <header class="px-4 py-3 mb-4 border-bottom">
                 <div class="d-flex align-items-center text-dark text-decoration-none">
                   <i id="header-icon" class="fas fa-home fa-lg"></i>
                   <span class="fs-4 ps-2">{{ section }}</span>
                 </div>
               </header>
+
+              <!-- Section home -->
               <div id="home" class="container py-4" v-if="section == 'Home'">
-                  <div class="p-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
+                  <div class="p-2 pb-5 px-sm-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
                     <div class="d-inline-block col">
                         <h1 class="display-6 fw-bold">{{ content.home.title }}</h1>                      
                         <p class="fs-5" v-html="content.home.text1"></p>
@@ -53,6 +56,7 @@
                     <img id="profilePhoto" src="assets/img/foto.jpg" alt="profile_photo" class="d-none d-md-inline-block ms-3 align-self-start align-self-lg-center rounded-circle img-thumbnail">
                   </div>
               
+
                   <div class="row align-items-md-stretch">
                     <div class="col-lg-6 offset-lg-1">
                       <div class="h-100 p-5 text-white bg-dark rounded-3">
@@ -76,23 +80,25 @@
                     </div>
                   </div>
               </div>
+
+              <!-- Section about -->
               <div id="about" class="container py-4" v-if="section == 'About me'">
 
                   <!-- Presentation -->
-                  <div class="px-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
+                  <div class="px-2 px-sm-5 pt-0 bg-light rounded-3 d-flex flex-wrap align-items-center">
                     <div class="d-inline-block col">
                         <div>
                           <h2 class="fw-bold">{{ content.about.title1 }}</h2>                      
                           <p class="fs-6 mb-0" v-html="content.about.personal"></p>  
                         </div> 
 
-                        <div class="d-flex">
-                          <button class="btn btn-primary secondary-color border-0 mt-3 mb-4 me-2" type="button"
+                        <div class="d-flex flex-wrap">
+                          <button class="button-icon col-12 col-sm-auto justify-content-around btn btn-primary secondary-color border-0 mt-3 mb-sm-4 me-2" type="button"
                           data-bs-toggle="collapse" data-bs-target="#collapseExperience" aria-expanded="false" aria-controls="collapseExperience">
-                            <i class="fas fa-briefcase "></i>
+                            <i class="fas fa-briefcase"></i>
                             <span class="px-2">{{ buttons.experience }}</span>
                           </button>
-                          <button class="btn btn-primary primary-color border-0 mt-3 mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                          <button class="col-12 col-sm-auto btn btn-primary primary-color border-0 mt-3 mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                             <span class="pe-2">{{ buttons.contactMe }}</span>
                             <i class="fas fa-chevron-right fa-sm"></i>
                           </button>
@@ -104,46 +110,44 @@
                   <!-- Education / Experience -->
                   <div class="collapse" id="collapseExperience">
 
-                    <div class="d-inline-block col-lg-6 m-0 px-5 my-4">
-                      <h2 class="fw-bold">
+                    <div class="d-inline-block col-12 col-lg-6 m-0 my-4 px-md-3">
+                      <h3 class="fw-bold">
                         <i class="fas fa-graduation-cap fa-sm"></i>
                         {{ content.about.title2 }}
-                      </h2> 
-                      <table class="my-4 ms-2" v-for="title in education">
-                        <tr>
-                          <td><i class="far fa-bookmark"></i><span class="ps-4">{{ title.date }}</span></td>
-                          <td class="px-3"><b>{{ title.place }}</b></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td class="px-3"><i><small>{{ title.title }}</small></i></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td class="px-3"><i>{{ title.type }}</i></td>
-                        </tr>
-                      </table>   
+                      </h3> 
+                      <hr>
+                      <div class="table-info my-4 ms-2" v-for="title in education">
+                        <p>
+                          <i class="far fa-bookmark"></i><span class="ps-4 pe-3">{{ title.date }}</span>
+                          <span class="pe-sm-3 table-place"><b>{{ title.place }}</b></span>
+                        </p>
+                        <span>
+                          <span class="pe-sm-3"><i><small>{{ title.title }}</small></i></span>
+                        </span>
+                        <p>
+                          <span class="pe-sm-3"><i>{{ title.type }}</i></span>
+                        </p>
+                      </div>   
                     </div> 
 
-                    <div class="d-inline-block col-lg-6 m-0 px-5 my-4">
-                      <h2 class="fw-bold">
+                    <div class="d-inline-block col-12 col-lg-6 m-0 my-4 px-md-3">
+                      <h3 class="fw-bold">
                         <i class="fas fa-briefcase fa-sm"></i>
                         {{ content.about.title3 }}
-                      </h2>  
-                      <table class="my-4 ms-2" v-for="training in experience">
-                        <tr>
-                          <td><i class="far fa-bookmark"></i><span class="ps-4">{{ training.date }}</span></td>
-                          <td class="px-3"><b>{{ training.place }}</b></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td class="px-3"><i><small>{{ training.title }}</small></i></td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td class="px-3"><i>{{ training.type }}</i></td>
-                        </tr>
-                      </table> 
+                      </h3>  
+                      <hr>
+                      <div class="table-info my-4 ms-2 text-truncate" v-for="training in experience">
+                        <p>
+                          <i class="far fa-bookmark"></i><span class="ps-4 pe-3">{{ training.date }}</span>
+                          <span class="pe-sm-3 table-place"><b>{{ training.place }}</b></span>
+                        </p>
+                        <span>
+                          <span class="pe-sm-3"><i><small>{{ training.title }}</small></i></span>
+                        </span>
+                        <p>
+                          <span class="pe-sm-3"><i>{{ training.type }}</i></span>
+                        </p>
+                      </div> 
                     </div>
                   </div>
                     
@@ -168,10 +172,16 @@
                     </div>
                   </div>
               </div>
+
+              <div id="threejs" class="container py-4">
+                
+                <div id="threecontainer" class="w-100"></div>
+              </div>
               
             </main>
                 
                  
+            <!-- Contact info Sidebar -->
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
               <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contact information</h5>
@@ -180,22 +190,22 @@
               <hr />
               <div class="offcanvas-body">
                 <table class="ms-3">
-                  <tr>
+                  <p>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-envelope-open-text fa-lg"></i></td>
                     <td class="pb-3"><span>juancarlos.aguirrecortes@gmail.com</span></td>
-                  </tr>
-                  <tr>
+                  </p>
+                  <p>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-mobile-alt fa-lg"></i></td>
                     <td class="pb-3"><span>(+34) 637 ** ** ** <br />- <i>Much better contacting me from email</i></span></td>
-                  </tr>
-                  <tr>
+                  </p>
+                  <p>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fas fa-map-marker-alt fa-lg"></i></td>
                     <td class="pb-3"><span>Paiporta, Valencia (Spain)</span></td>
-                  </tr>
-                  <tr>
+                  </p>
+                  <p>
                     <td class="d-flex justify-content-center pb-3 pe-3"><i class="fab fa-linkedin fa-lg"></i></td>
                     <td class="pb-3"><a href="https://www.linkedin.com/in/jcarlosaguirre" class="text-decoration-none">Juan Carlos Aguirre Cortés</a></td>
-                  </tr>
+                  </p>
                 </table>
               </div>
             </div>
@@ -205,6 +215,43 @@
             </footer>
         </div>
     </div>
-    <script src="./js/vue.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/three.js"></script>
+    <script type="module" src="js/orbitControls.js"></script>
+    <script src="js/scene.js"></script>
+    <!-- <script>
+
+      // window.addEventListener( "load", () => {
+
+        const canvas = document.getElementById("threecontainer");
+      
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000 );
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
+        canvas.appendChild( renderer.domElement );
+
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+
+        camera.position.z = 5;
+
+        const animate = function () {
+          requestAnimationFrame( animate );
+
+          cube.rotation.x += 0.01;
+          cube.rotation.y += 0.01;
+
+          renderer.render( scene, camera );
+        };
+
+        animate();
+
+      // })
+      
+    </script> -->
 </body>
 </html>

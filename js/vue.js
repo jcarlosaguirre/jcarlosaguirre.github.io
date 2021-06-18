@@ -74,6 +74,9 @@ const vueApp = {
                 contactMe: "Contact info"
             },
 
+            scene3D: undefined,
+
+
         }
     },
     methods:{
@@ -121,6 +124,7 @@ const vueApp = {
             /* Copy the text inside the text field */
             document.execCommand("copy", false, text );
         },
+
 
     },
     mounted(){

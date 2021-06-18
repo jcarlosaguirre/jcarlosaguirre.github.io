@@ -4,6 +4,8 @@
     white-space: pre-line;
 }
 
+/* #region scrollbar */
+
 *::-webkit-scrollbar {
     width: 5px;
 }
@@ -22,12 +24,10 @@
     background-color: rgb(70, 153, 192);
 }
 
-#main-container{
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+/* #endregion */
 
-}
 
+/* #region colors */
 .primary-color{
     background: #402f9ac2 !important;
 }
@@ -44,6 +44,20 @@
     background: #346896 !important;
 }
 
+/* #endregion */
+
+
+#main-container{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+}
+
+.table-info{
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+}
+
 #profilePhoto{
     width: 30%;
     height: 30%;
@@ -53,4 +67,30 @@
 
 .list-style-none{
     list-style: none !important;
+}
+
+/* .button-icon{
+    display: grid;
+    grid-template-columns: auto 1fr;
+} */
+
+#threecontainer{
+
+    height: 500px;
+}
+
+@media (max-width: 410px){
+
+
+    .table-info > p:nth-child(1){
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+    }
+
+    .table-place{
+        grid-column: 1 / 3;
+    }
+
 }
