@@ -74,7 +74,7 @@ const vueApp = {
                 contactMe: "Contact info"
             },
 
-            scene3D: undefined,
+            scene3D: false,
 
 
         }
@@ -96,6 +96,12 @@ const vueApp = {
                     
                 case 2:
                     this.section = "Skills";
+
+                    if( !this.scene3D ){
+                        let threejs = document.createElement('script')
+                        threejs.setAttribute('src', 'js/scene.js')
+                        document.body.appendChild(threejs)
+                    }
                     break;
                     
                 case 3:

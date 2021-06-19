@@ -6,6 +6,7 @@ const canvas = document.getElementById("threecontainer");
       
 // Create scene
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xff0000);
 const camera = new THREE.PerspectiveCamera( 75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000 );
 
 
@@ -25,39 +26,62 @@ const textures = [
   'assets/icons/node_original.png',
   'assets/icons/java-icon.png',
   'assets/icons/php_original.png',
-  'assets/icons/docker_original.png'
+  'assets/icons/docker-icon.png'
 ]
 
-let i = 0;
+let i = -1;
+let item = 0;
 
 textures.forEach(element => {
   
   const materials = [
-    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //right side
-    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //left side
-    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //top side
-    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //bottom side
-    new THREE.MeshBasicMaterial({ map: loader.load(element), side: THREE.DoubleSide }), //front side
-    new THREE.MeshBasicMaterial({ map: loader.load(element), side: THREE.DoubleSide }), //back side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //right side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //left side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //top side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //bottom side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //front side
+    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //back side
   ];
 
-  var faceMaterial = new THREE.MeshFaceMaterial( materials );
+  // var faceMaterial = new THREE.MeshFaceMaterial( materials );
 
   const geometry = new THREE.BoxGeometry(1, 1, .2);
   // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
-  const cube = new THREE.Mesh( geometry, faceMaterial );
-  cube.position.set( i, 0, 1)
+  const cube = new THREE.Mesh( geometry, materials );
+  
+  switch ( item ) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      cube.position.set( i, 2, 1)
+      break;
+    
+    case 4:
+      i = -3;
+    case 5:
+      cube.position.set( i, 0, 1)
+      break;
+
+    case 6:
+      cube.position.set( i, -2, 1)
+      break;
+  
+    default:
+      break;
+  }
   scene.add( cube );
 
   var light = new THREE.DirectionalLight( 0xffffff );
-  light.position.set( 0, 1, 1 ).normalize();
+  light.position.set( 0, -2, 1 ).normalize();
   scene.add(light);
 
   objects.push( cube )
 
   console.log( i );
 
-  i += .5;
+  i += 1.5;
+  item++;
   
 });
 
@@ -124,42 +148,13 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
           /* if( intersects[0].object.material.color.r == 1 ) intersects[0].object.material.color.setHex(0x00ff00)
           else intersects[0].object.material.color.setHex(0xff0000) */
 
-          intersects[0].object.rotation.y += .05;
+          // intersects[0].object.rotation.y += .05;
 
           console.log( intersects[0].object );
+
+          rotateCard( intersects[0].object )
           
       }
-
-
-    // If a mesh is selected and is active
-    /* if ( intersects.length > 0 && intersects[ 0 ].object.isActive ) {
-
-      console.log( intersects[ 0 ].object );
-
-      // And all meshes selected is true
-      if( this.seleccionaTodo ){
-
-        // Deselect every mesh
-        while( this.selectedItem.length > 0){
-
-          this.unSelectObject()
-        }
-      }
-
-      console.log( intersects );
-
-      // Then add the selected mesh to array
-      this.addObjeto( intersects[ 0 ].object )
-    }
-
-    // If there is no mesh selected
-    else if(intersects.length == 0 && this.selectedItem.length > 0){
-      
-      console.log( intersectsPosition[0].point );
-
-      this.moveElements( intersectsPosition[0].point );
-
-    } */
   }
 
 })
@@ -177,3 +172,33 @@ window.addEventListener('resize', () => {
   );
 
 }, false);
+
+var interval, currentCard;
+
+function rotateCard( mesh ){
+
+  // If there is a card spinning
+  if( currentCard ){
+
+    // If new mesh is not the current one spinning
+    if( currentCard != mesh ) {
+
+      // Reset its position
+      currentCard.rotation.y = 0;
+    }
+  } 
+
+  if( currentCard != mesh ) {
+
+    // Reset its position
+    clearInterval( interval )
+    currentCard = mesh;
+  
+    interval = setInterval( () => {
+      currentCard.rotation.y += .02;
+    }, 20)
+  }
+
+
+  
+}
