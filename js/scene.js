@@ -10,17 +10,56 @@ const camera = new THREE.PerspectiveCamera( 75, canvas.offsetWidth / canvas.offs
 
 
 // Renderer draws the scene. Append it to the DOM element
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
 canvas.appendChild( renderer.domElement );
 
 // Create cube and add it to scene
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, antialias: true } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
 
-objects.push( cube )
+const loader = new THREE.TextureLoader();
+
+const textures = [
+  'assets/icons/js_original.png',
+  'assets/icons/vue_original.png',
+  'assets/icons/Angular_original.png',
+  'assets/icons/node_original.png',
+  'assets/icons/java-icon.png',
+  'assets/icons/php_original.png',
+  'assets/icons/docker_original.png'
+]
+
+let i = 0;
+
+textures.forEach(element => {
+  
+  const materials = [
+    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //right side
+    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //left side
+    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //top side
+    new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }), //bottom side
+    new THREE.MeshBasicMaterial({ map: loader.load(element), side: THREE.DoubleSide }), //front side
+    new THREE.MeshBasicMaterial({ map: loader.load(element), side: THREE.DoubleSide }), //back side
+  ];
+
+  var faceMaterial = new THREE.MeshFaceMaterial( materials );
+
+  const geometry = new THREE.BoxGeometry(1, 1, .2);
+  // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
+  const cube = new THREE.Mesh( geometry, faceMaterial );
+  cube.position.set( i, 0, 1)
+  scene.add( cube );
+
+  var light = new THREE.DirectionalLight( 0xffffff );
+  light.position.set( 0, 1, 1 ).normalize();
+  scene.add(light);
+
+  objects.push( cube )
+
+  console.log( i );
+
+  i += .5;
+  
+});
 
 camera.position.z = 5;
 
@@ -42,6 +81,7 @@ var pointer = {
     y: 0
 }
 
+// Update pointer position and interactions with meshes
 document.addEventListener("pointermove", ( event, bool = false ) => {
     
 
@@ -69,24 +109,26 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
 
     // If click position is inside the canvas
     if  (( pointer.x < 1 && pointer.x > -1 ) &&
-    ( pointer.y < 1 && pointer.y > -1 )) {
+        ( pointer.y < 1 && pointer.y > -1 )) {
     
-        console.log( pointer );
+      // console.log( pointer );
 
-    // Scan its position
-    raycaster.setFromCamera( pointer, camera );
+      // Scan its position
+      raycaster.setFromCamera( pointer, camera );
 
-    // Get intersected mesh
-    const intersects = raycaster.intersectObjects( objects, true );
+      // Get intersected mesh
+      const intersects = raycaster.intersectObjects( objects, true );
 
-    if( intersects[0]!= undefined ){
+      if( intersects[0] != undefined ){
 
-        if( intersects[0].object.material.color.r == 1 ) intersects[0].object.material.color.setHex(0x00ff00)
-        else intersects[0].object.material.color.setHex(0xff0000)
+          /* if( intersects[0].object.material.color.r == 1 ) intersects[0].object.material.color.setHex(0x00ff00)
+          else intersects[0].object.material.color.setHex(0xff0000) */
 
-        console.log( intersects[0].object );
-        
-    }
+          intersects[0].object.rotation.y += .05;
+
+          console.log( intersects[0].object );
+          
+      }
 
 
     // If a mesh is selected and is active
@@ -121,3 +163,17 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
   }
 
 })
+
+    
+// Update renderer to fit new window size
+window.addEventListener('resize', () => {
+  
+  camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+
+  camera.updateProjectionMatrix();
+  renderer.setSize(
+    canvas.offsetWidth,
+    canvas.offsetHeight
+  );
+
+}, false);
