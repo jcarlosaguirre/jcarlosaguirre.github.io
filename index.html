@@ -174,10 +174,17 @@
               </div>
 
               <!-- Skills section with three.js -->
-              <div id="threejs" class="container py-4" v-show="section == 'Skills'">
-                
-                <div id="threecontainer" class="w-100"></div>
-              </div>
+              <!-- <div class="container"> -->
+                <!-- <div class="row">
+                  <span v-for="skill in skills" :key="skill.name">
+                    <img :src="skill.icon" alt="" width="100" height="100">
+                  </span>
+                </div> -->
+
+                <div id="threejs" class="py-4" v-show="section == 'Skills'">
+                  <div id="threecontainer" class="col-12 col-md-10 col-lg-8 mx-auto h-100"></div>
+                </div>
+              <!-- </div> -->
               
             </main>
                 
@@ -218,6 +225,6 @@
     </div>
     <script src="js/vue.js"></script>
     <script src="js/three.js"></script>
-    <!-- <script src="js/scene.js"></script> -->
+    <script src="js/OrbitControls.js"></script>
   </body>
 </html>

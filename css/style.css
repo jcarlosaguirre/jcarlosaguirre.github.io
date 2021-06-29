@@ -74,9 +74,9 @@
     grid-template-columns: auto 1fr;
 } */
 
-#threecontainer{
+#threejs{
 
-    height: 500px;
+    height: 80%;
 }
 
 @media (max-width: 410px){
