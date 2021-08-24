@@ -77,6 +77,17 @@ const vueApp = {
 
             scene3D: false,
 
+            skills: [
+                { name: 'JavaScript', icon: 'assets/icons/js_original.png' },
+                { name: 'Vue.js', icon: 'assets/icons/vue_original.png' },
+                { name: 'Angular', icon: 'assets/icons/Angular_original.png' },
+                { name: 'Node.js', icon: 'assets/icons/node_original.png' },
+                { name: 'Java', icon: 'assets/icons/java-icon.png' },
+                { name: 'PHP', icon: 'assets/icons/php_original.png' },
+                { name: 'Docker', icon: 'assets/icons/docker-icon.png' },
+            ]
+  
+
 
         }
     },

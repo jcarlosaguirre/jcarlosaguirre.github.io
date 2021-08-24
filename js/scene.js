@@ -1,113 +1,140 @@
-var objects = [];
+let scene, camera, renderer, loader, raycaster, animate, controls;
 
+let pointer = {
+  x: 0,
+  y: 0
+}
+
+let interval, currentCard;
+let objects = [];
 
 // Get DOM element
 const canvas = document.getElementById("threecontainer");
       
-// Create scene
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xff0000);
-const camera = new THREE.PerspectiveCamera( 75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000 );
+
+function init(){
+
+  // Create scene and camera
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xff0000);
+  scene.add( new THREE.GridHelper(50, 50, 0x000000, 0xffffff) );
+
+  camera = new THREE.PerspectiveCamera( 75, canvas.offsetWidth / canvas.offsetHeight, 1, 1000 );
+  camera.position.set( 15, 13, 15);
+  camera.rotation.set( 0, 0, 0);
+
+  console.log( camera );
 
 
-// Renderer draws the scene. Append it to the DOM element
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
-canvas.appendChild( renderer.domElement );
-
-// Texture loader
-const loader = new THREE.TextureLoader();
-
-const textures = [
-  'assets/icons/js_original.png',
-  'assets/icons/vue_original.png',
-  'assets/icons/Angular_original.png',
-  'assets/icons/node_original.png',
-  'assets/icons/java-icon.png',
-  'assets/icons/php_original.png',
-  'assets/icons/docker-icon.png'
-]
-
-let i = -1;
-let item = 0;
-
-// Create cards and set them to scene
-textures.forEach(element => {
+  // Renderer draws the scene. Append it to the DOM element
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
+  canvas.appendChild( renderer.domElement );
   
-  const materials = [
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //right side
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //left side
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //top side
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //bottom side
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //front side
-    new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //back side
-  ];
+  controls = new THREE.OrbitControls(camera, renderer.domElement)
 
-  // var faceMaterial = new THREE.MeshFaceMaterial( materials );
+  // Create cubes and add them to scene
+  loader = new THREE.TextureLoader();
 
-  const geometry = new THREE.BoxGeometry(1, 1, .2);
-  // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
-  const cube = new THREE.Mesh( geometry, materials );
-  cube.skill = item
-  cube.callback = function(){
-    window.alert( this.skill )
-  }
-  
-  switch ( item ) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      cube.position.set( i, 2, 1)
-      break;
+  const textures = [
+    'assets/icons/js_original.png',
+    'assets/icons/vue_original.png',
+    'assets/icons/Angular_original.png',
+    'assets/icons/node_original.png',
+    'assets/icons/docker-icon.png',
+    'assets/icons/php_original.png',
+    'assets/icons/java-icon.png',
+  ]
+
+  let i = 0;
+  let item = 0;
+
+  textures.forEach(element => {
     
-    case 4:
-      i = -3;
-    case 5:
-      cube.position.set( i, 0, 1)
-      break;
+    let materials = [
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //right side
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //left side
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //top side
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, color: 0xffffff, side: THREE.DoubleSide }), //bottom side
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //front side
+      new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1, map: loader.load(element), side: THREE.DoubleSide }), //back side
+    ];
 
-    case 6:
-      cube.position.set( i, -2, 1)
-      break;
+    let geometry = new THREE.BoxGeometry(5, 5, 1);
+    // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
+    let cube = new THREE.Mesh( geometry, materials );
+    
+    switch (item) {
+      case 0:
+        cube.position.set( .5, 2.5, 3.5 );
+        cube.rotation.y = 4.7
+        cube.type = "H"
+        break;
+      case 1:
+        cube.position.set( .5, 2.5, 8.5 );
+        cube.rotation.y = 4.7
+        cube.type = "H"
+        break;
+      case 2:
+        cube.position.set( .5, 2.5, 13.5 );
+        cube.rotation.y = 4.7
+        cube.type = "H"
+        break;
+      case 3:
+        cube.position.set( 3.5, 2.5, .5 );
+        cube.rotation.y = 0
+        cube.type = "V"
+        break;
+      case 4:
+        cube.position.set( 8.5, 2.5, .5 );
+        cube.rotation.y = 0
+        cube.type = "V"
+        break;
+      case 5:
+        cube.position.set( 13.5, 2.5, .5 );
+        cube.rotation.y = 0
+        cube.type = "V"
+        break;
+      default:
+        cube.position.set( 3.5, 0, 3.5 );
+        cube.rotation.y = 0;
+        cube.rotation.x = 1.57;
+        cube.rotation.z = 1.57;
+        
+        cube.type = "V"
+
+    }
+    
+
+    scene.add( cube );
+
+    var light = new THREE.DirectionalLight( 0xffffff );
+    light.position.set(50, 70, 50 ).normalize();
+    scene.add(light);
+
+    objects.push( cube )
+
+    console.log( i );
+
+    i -= 1.2;
+    item++;
+    
+  });
   
-    default:
-      break;
-  }
-  scene.add( cube );
 
-  var light = new THREE.DirectionalLight( 0xffffff );
-  light.position.set( 0, -2, 1 ).normalize();
-  scene.add(light);
+  raycaster = new THREE.Raycaster();
 
-  objects.push( cube )
-
-  console.log( i );
-
-  i += 1.5;
-  item++;
-  
-});
-
-camera.position.z = 5;
+  animate = function () {
+      requestAnimationFrame( animate );
 
 
-const raycaster = new THREE.Raycaster();
+      renderer.render( scene, camera );
+  };
 
-const animate = function () {
-    requestAnimationFrame( animate );
-
-
-    renderer.render( scene, camera );
-};
-
-animate();
-
-
-var pointer = {
-    x: 0,
-    y: 0
 }
+
+init();
+animate();
 
 // Update pointer position and interactions with meshes
 document.addEventListener("pointermove", ( event, bool = false ) => {
@@ -171,17 +198,29 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
 // Update renderer to fit new window size
 window.addEventListener('resize', () => {
   
-  camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+  if( window.innerWidth > 576 ){
 
-  camera.updateProjectionMatrix();
-  renderer.setSize(
-    canvas.offsetWidth,
-    canvas.offsetHeight
-  );
+    camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+
+    camera.updateProjectionMatrix();
+    renderer.setSize(
+      canvas.offsetWidth,
+      canvas.offsetHeight
+    );
+  }
+  else{
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+  }
 
 }, false);
 
-var interval, currentCard;
 
 document.addEventListener("click", ( event, bool = false ) =>{
 
@@ -214,7 +253,13 @@ function rotateCard( mesh ){
     if( currentCard != mesh ) {
 
       // Reset its position
-      currentCard.rotation.y = 0;
+      // if(currentCard.type == "H") 
+      let interval = setInterval( () => {
+        currentCard.position.y -= .02;
+        if( currentCard.position.y < 2.5 ) clearInterval( interval )
+      }, 2)
+      currentCard.position.y = 2.5;
+      // else currentCard.position.y = 0;
     }
   } 
 
@@ -225,8 +270,9 @@ function rotateCard( mesh ){
     currentCard = mesh;
   
     interval = setInterval( () => {
-      currentCard.rotation.y += .02;
-    }, 20)
+      currentCard.position.y += .02;
+      if( currentCard.position.y > 3.5 ) clearInterval( interval )
+    }, 2)
   }
 
 
