@@ -31,7 +31,7 @@ function init(){
   renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
   canvas.appendChild( renderer.domElement );
   
-  controls = new THREE.OrbitControls(camera, renderer.domElement)
+  // controls = new THREE.OrbitControls(camera, renderer.domElement)
 
   // Create cubes and add them to scene
   loader = new THREE.TextureLoader();
