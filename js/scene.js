@@ -15,8 +15,7 @@ const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
 canvas.appendChild( renderer.domElement );
 
-// Create cube and add it to scene
-
+// Texture loader
 const loader = new THREE.TextureLoader();
 
 const textures = [
@@ -32,6 +31,7 @@ const textures = [
 let i = -1;
 let item = 0;
 
+// Create cards and set them to scene
 textures.forEach(element => {
   
   const materials = [
@@ -48,6 +48,10 @@ textures.forEach(element => {
   const geometry = new THREE.BoxGeometry(1, 1, .2);
   // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
   const cube = new THREE.Mesh( geometry, materials );
+  cube.skill = item
+  cube.callback = function(){
+    window.alert( this.skill )
+  }
   
   switch ( item ) {
     case 0:
@@ -116,24 +120,24 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
 
     if( !bool ){
 
-      if( window.innerWidth > 1600 ){
+      /* if( window.innerWidth > 1600 ){
 
         canvasWidth = 1600;
-      }
+      } */
       
         
       pointer.x = ( ( event.clientX - canvasLeft ) / canvasWidth ) * 2 - 1;
       pointer.y = - ( ( event.clientY - area.top ) / ( area.bottom - area.top) ) * 2 + 1;
 
     }
-    else{
+    /* else{
       pointer.x = ( ( event.targetTouches[0].clientX - area.left ) / ( area.width - area.left ) ) * 2 - 1;
       pointer.y = - ( ( event.targetTouches[0].clientY - area.top ) / ( area.bottom - area.top) ) * 2 + 1;
-    }
+    } */
 
     // If click position is inside the canvas
-    if  (( pointer.x < 1 && pointer.x > -1 ) &&
-        ( pointer.y < 1 && pointer.y > -1 )) {
+    /* if  (( pointer.x < 1 && pointer.x > -1 ) &&
+        ( pointer.y < 1 && pointer.y > -1 )) { */
     
       // console.log( pointer );
 
@@ -150,16 +154,20 @@ document.addEventListener("pointermove", ( event, bool = false ) => {
 
           // intersects[0].object.rotation.y += .05;
 
-          console.log( intersects[0].object );
-
+          // console.log( intersects[0].object );
+          document.getElementById("app").style.cursor = "pointer";
           rotateCard( intersects[0].object )
           
       }
-  }
+      else{
+        console.log(intersects[0] == undefined);
+        document.getElementById("app").style.cursor = "default";
+      }
+  // }
 
 })
 
-    
+ 
 // Update renderer to fit new window size
 window.addEventListener('resize', () => {
   
@@ -174,6 +182,28 @@ window.addEventListener('resize', () => {
 }, false);
 
 var interval, currentCard;
+
+document.addEventListener("click", ( event, bool = false ) =>{
+
+  event.preventDefault();
+  var area = renderer.domElement.getBoundingClientRect();
+  var canvasLeft = area.left;   // Margin of canvas
+  var canvasWidth = area.width  // Width of canvas
+
+  pointer.x = ( ( event.clientX - canvasLeft ) / canvasWidth ) * 2 - 1;
+  pointer.y = - ( ( event.clientY - area.top ) / ( area.bottom - area.top) ) * 2 + 1;
+
+  raycaster.setFromCamera( pointer, camera );
+
+  var intersects = raycaster.intersectObjects( objects ); 
+
+  if ( intersects.length > 0 ) {
+
+      intersects[0].object.callback();
+
+  }
+
+})
 
 function rotateCard( mesh ){
 

@@ -39,15 +39,15 @@ const vueApp = {
                     title3:  "Experience",
                     personal:  "Wanting to work in this virtual world that is the internet begins with being a videogames player. " +
                             "Videogames have always caught my attention and I wanted to enter the world of programming because of them." + "\n\n" +
-                            "Right now I am studying <b>web development</b>, identifying myself as a full-stack developer. " + 
+                            "Right now, I've finished my studies on <b>Web development</b>, identifying myself as a full-stack developer. " + 
                             "Javascript is my <b>main stack</b>, but I also have knowledge of other languages ​​and I would like to continue learning different technologies" + "\n\n" +
-                            "My intention is to <b>continue learning as much as I can</b>, whether in a work environment, study or combining both. " +
+                            "My intention is to <b>continue learning as much as I can</b>, whether in a work environment, studying or combining both. " +
                             "I consider myself an organized person, self-taught and with whom it is easy to work so, if you are <b>looking for someone for your team</b>, here I leave my contact information:",
                     
                     section1Title: "Know my skills",
                     section1Text: "Here you will find which technologies I am in, which ones I have basic knowledge on and which ones make me curious to learn.",
                     section2Title: "Hobbies",
-                    section2Text: "<ul class='p-3 mb-0'><li class='py-1'>Playing the guitar</li><li class='py-1'>Videogames</li><li class='py-1'>I love listening to music</li><li class='py-1'>To have ideas that I never develop</li></ul>",
+                    section2Text: "<ul class='p-3 mb-0'><li class='py-1'>Playing the guitar.</li><li class='py-1'>Play some videogames.</li><li class='py-1'>To have ideas that I never develop.</li><li class='py-1'>Listen to different genres of music. I have a wide sense of taste.</li></ul>",
                 },
             },
 
@@ -59,7 +59,8 @@ const vueApp = {
 
             // Working experience
             experience:[
-                { place: "Ardis Software", title: "Training period", type: "Web & Angular developer", date: "Jan. - Jun. 2021" },
+                { place: "Ardis Software", title: "Work experience contract", type: "Angular / Node programmer", date: "Jul. - Sep. 2021" },
+                { place: "Ardis Software", title: "Training period", type: "Angular / Node programmer", date: "Jan. - Jun. 2021" },
                 { place: "EMO - Especialistas en ortopedia", title: "Training period", type: "IT & PHP Programmer", date: "Mar. - Jun. 2019" }
             ],
 
@@ -101,6 +102,11 @@ const vueApp = {
                         let threejs = document.createElement('script')
                         threejs.setAttribute('src', 'js/scene.js')
                         document.body.appendChild(threejs)
+
+                        /* setTimeout( () => {
+                            let event = new Event("resize");
+                            document.dispatchEvent( event );
+                        }, 500) */
                     }
                     break;
                     
