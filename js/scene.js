@@ -63,6 +63,12 @@ function init(){
     let geometry = new THREE.BoxGeometry(5, 5, 1);
     // const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 , shininess: 100 } );
     let cube = new THREE.Mesh( geometry, materials );
+
+    cube.skill = item;
+    cube.callback = function(){
+
+      alert( this.item )
+    }
     
     switch (item) {
       case 0:
