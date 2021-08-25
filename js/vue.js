@@ -59,7 +59,7 @@ const vueApp = {
 
             // Working experience
             experience:[
-                { place: "Ardis Software", title: "Work experience contract", type: "Angular / Node programmer", date: "Jul. - Sep. 2021" },
+                { place: "Ardis Software", title: "Work experience contract", type: "Angular / Node programmer", date: "Jul. - Currently working" },
                 { place: "Ardis Software", title: "Training period", type: "Angular / Node programmer", date: "Jan. - Jun. 2021" },
                 { place: "EMO - Especialistas en ortopedia", title: "Training period", type: "IT & PHP Programmer", date: "Mar. - Jun. 2019" }
             ],
