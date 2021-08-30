@@ -39,9 +39,9 @@ const vueApp = {
                     title3:  "Experience",
                     personal:  "Wanting to work in this virtual world that is the internet begins with being a videogames player. " +
                             "Videogames have always caught my attention and I wanted to enter the world of programming because of them." + "\n\n" +
-                            "Right now, I've finished my studies on <b>Web development</b>, identifying myself as a full-stack developer. " + 
+                            "Right now, I've finished my studies on <b>Web development</b>, identifying myself as a front-end / full-stack developer. " + 
                             "Javascript is my <b>main stack</b>, but I also have knowledge of other languages ​​and I would like to continue learning different technologies" + "\n\n" +
-                            "My intention is to <b>continue learning as much as I can</b>, whether in a work environment, studying or combining both. " +
+                            "My purpose is not to master a lot of technologies, but I want <b>to learn as much as I can</b>, whether in a work environment, studying or combining both. " +
                             "I consider myself an organized person, self-taught and with whom it is easy to work so, if you are <b>looking for someone for your team</b>, here I leave my contact information:",
                     
                     section1Title: "Know my skills",
