@@ -85,6 +85,16 @@ const vueApp = {
                 { name: 'Java', icon: 'assets/icons/java-icon.png' },
                 { name: 'PHP', icon: 'assets/icons/php_original.png' },
                 { name: 'Docker', icon: 'assets/icons/docker-icon.png' },
+            ],
+
+            projects: [
+                { title: "Monster's cards", banner: 'bg-primary', link: 'https://jcarlosaguirre.github.io/react-project-1/', tech: 'React', icon: 'assets/icons/React_original.png' },
+                /*{ title: 'Vue.js', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/vue_original.png' },
+                { title: 'Angular', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/Angular_original.png' },
+                { title: 'Node.js', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/node_original.png' },
+                { title: 'Java', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/java-icon.png' },
+                { title: 'PHP', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/php_original.png' },
+                { title: 'Docker', banner: 'bg-primary', link: '#', tech: 'React', icon: 'assets/icons/docker-icon.png' },*/
             ]
   
 
@@ -109,15 +119,11 @@ const vueApp = {
                 case 2:
                     this.section = "Skills";
 
+                    // Append three.js scene script to body if not rendered
                     if( !this.scene3D ){
                         let threejs = document.createElement('script')
                         threejs.setAttribute('src', 'js/scene.js')
                         document.body.appendChild(threejs)
-
-                        /* setTimeout( () => {
-                            let event = new Event("resize");
-                            document.dispatchEvent( event );
-                        }, 500) */
                     }
                     break;
                     
@@ -133,19 +139,6 @@ const vueApp = {
             
             document.getElementById("header-icon").classList.add( this.icons[ value ] )
             
-        },
-
-        copyText( event ){
-
-            console.log( event.target.innerText );
-            var copyText = event.target;
-
-            /* Select the text field */
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-            /* Copy the text inside the text field */
-            document.execCommand("copy", false, text );
         },
 
 

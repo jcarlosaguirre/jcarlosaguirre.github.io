@@ -58,10 +58,10 @@
     grid-template-rows: repeat(3, auto);
 }
 
-#profilePhoto{
+.profilePhoto{
     width: 30%;
     height: 30%;
-    max-width: 230px;
+    max-width: 230px !important;
     shape-outside: circle();
 }
 
@@ -77,6 +77,14 @@
 #threejs{
 
     height: 80%;
+}
+
+.project-banner{
+    height: 50px;
+}
+
+.project-icon{
+
 }
 
 @media (max-width: 410px){
