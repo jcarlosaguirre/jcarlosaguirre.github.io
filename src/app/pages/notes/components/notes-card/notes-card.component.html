@@ -1,0 +1,13 @@
+<div class="note-wrapper">
+
+  <div class="note-content hoverable hov-translate hov-pointer m-3">
+    <h5 class="note-title p-2 px-3 mb-4">{{ noteData.title }}</h5>
+    <div class="note-body px-3 pb-2">
+      <p> {{ noteData.content }} </p>
+      <hr/>
+      <p class="mb-0">
+        {{ noteData.createdAt | date }}
+      </p>
+    </div>
+  </div>
+</div>
