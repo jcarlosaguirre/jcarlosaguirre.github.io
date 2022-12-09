@@ -1,0 +1,21 @@
+<div class="notes-container p-3">
+  <h3>Note List</h3>
+  <div class="screenBlocker" *ngIf="blockScreen"></div>
+
+  <app-notes-list [notesList]="notes"></app-notes-list>
+
+  <div class="buttons-wrapper ps-3 " >
+    <button (click)="export()" class="bg-blue hoverable hov-bg-color">
+      <fa-icon [icon]="addNewIcon" class="fs-5"></fa-icon>
+      <span class="d-none d-md-inline ps-2">Create new note</span>
+    </button>
+    <button (click)="export()" class="bg-blue hoverable hov-bg-color">
+      <fa-icon [icon]="exportIcon" class="fs-5"></fa-icon>
+      <span class="d-none d-md-inline ps-2">Export notes</span>
+    </button>
+    <button (click)="addNote()" class="bg-green hoverable hov-bg-color">
+      <fa-icon [icon]="importIcon" class="fs-5"></fa-icon>
+      <span class="d-none d-md-inline ps-2">Import notes</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+.main-container {
+  max-width: 1400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  .search-wrapper {
+
+  }
+
+  .loader-container:not([hidden]) {
+    display: flex;
+  }
+
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    border-color: salmon;
+    border-left-color: transparent;
+  }
+
+  .note-list-wrapper{
+    width: 100%;
+    padding: 20px;
+    /*display: flex;
+    flex-wrap: wrap;*/
+    overflow-y: auto;
+
+    .note {
+      position: relative;
+    }
+
+
+    .notes-editor-wrapper {
+      width: 100%;
+      max-width: 800px;
+      position: absolute;
+      top: 100%;
+      opacity: 0;
+      transition: all 0.5s, height 0s;
+
+      &.active {
+        top: 50%;
+        opacity: 1;
+        z-index: 100;
+        transition: all 0.5s, height 0s;
+      }
+
+      .header {
+        position: relative;
+        border-radius: 10px 10px 0 0;
+        z-index: 10;
+      }
+    }
+  }
+}

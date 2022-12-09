@@ -1,0 +1,36 @@
+<div class="main-container p-3 pt-5 mx-auto">
+
+  <div class="search-wrapper col-12 col-sm-8 col-lg-6 mb-3 mx-auto p-0">
+    <div class="input-wrapper mb-3">
+      <input type="text" required
+             placeholder="email@example.com"
+             class="iconField form-control" id="exampleFormControlInput1">
+      <fa-icon [icon]="availableIcons['searchIcon']" class="ps-2"></fa-icon>
+    </div>
+  </div>
+
+  <div class="loader-container w-100 justify-content-center" [hidden]="!reloadNotes">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="note-list-wrapper row px-0"
+       data-masonry='{"percentPosition": true, "itemSelector": "app-notes-card" }' >
+
+    <ngx-masonry [options]="{ itemSelector: 'note' }" [hidden]="reloadNotes">
+      <app-notes-card ngxMasonryItem *ngFor="let note of notesList, let i = index"
+                      [noteData]="note" (click)="editNote( {state: true, data: note}, i )"
+                      class="note col-12 col-md-6 col-xl-4 p-0"></app-notes-card>
+    </ngx-masonry>
+
+    <div class="notes-editor-wrapper p-3 start-50 top-50 translate-middle" [ngClass]="{'active': showEditor}" >
+      <div class="header bg-blue px-3 py-2">
+        <h5 class="m-0"> Edit note </h5>
+      </div>
+      <app-notes-form [note]="selectedNote.note" (closeForm)="editNote($event, -1)" *ngIf="selectedNote.note"></app-notes-form>
+    </div>
+  </div>
+
+
+</div>
