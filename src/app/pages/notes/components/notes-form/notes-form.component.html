@@ -20,6 +20,12 @@
   {{noteForm.errors}}
 
   <!-- From actions -->
+  <button (click)="deleteNote()"
+          class="delete-button bg-red">
+    <fa-icon [icon]="trashIcon" class="fs-5"></fa-icon>
+    <span class="d-none d-sm-inline ps-2">Delete</span>
+  </button>
+
   <div class="buttons-wrapper">
     <button (click)="saveNote()" [disabled]="noteForm.invalid"
             class="bg-green">

@@ -7,6 +7,9 @@ import Note from "../models/Note";
 })
 export class NotesService {
 
+  private _notesChange = new BehaviorSubject<Note[] | undefined>(undefined);
+  notesChange$: Observable<Note[] | undefined> = this._notesChange.asObservable();
+
   private _screenBlocker = new BehaviorSubject<boolean | undefined>(undefined);
   screenBlocker$: Observable<boolean | undefined> = this._screenBlocker.asObservable();
 
@@ -14,6 +17,10 @@ export class NotesService {
   updateNotes$: Observable<any | undefined> = this._updateNotes.asObservable();
 
   constructor() { }
+
+  setNotes(notes: Note[]): void {
+    this._notesChange.next( notes );
+  }
 
   blockScreen( status: boolean ) {
     this._screenBlocker.next( status );

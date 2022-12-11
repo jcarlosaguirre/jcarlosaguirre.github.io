@@ -9,7 +9,7 @@ import {SpinLoaderComponent} from "../components/spin-loader/spin-loader.compone
     SpinLoaderComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     SpinLoaderComponent

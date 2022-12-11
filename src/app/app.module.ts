@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import {StorageService} from "./services/storage.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { SpinLoaderComponent } from './components/spin-loader/spin-loader.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,8 @@ import { SpinLoaderComponent } from './components/spin-loader/spin-loader.compon
   ],
     imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       AppRoutingModule,
-      BrowserAnimationsModule
     ],
   providers: [StorageService],
   bootstrap: [AppComponent]

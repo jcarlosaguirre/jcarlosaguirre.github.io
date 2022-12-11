@@ -33,6 +33,12 @@ html, body {
   right: 40px;
 }
 
+.delete-button {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+}
+
 /* Button global styles */
 button:not(.menu-btn) {
   padding: 10px 30px;

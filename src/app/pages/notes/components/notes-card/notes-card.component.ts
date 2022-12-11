@@ -10,22 +10,13 @@ import {NotesService} from "../../services/notes.service";
 })
 export class NotesCardComponent implements OnInit {
 
-  @Input('noteData') noteData: Note = new Note();
+  @Input('noteData') noteData: Note = new Note('0', 'new note', 'note content');
   @Output('selected') selected = new EventEmitter()
 
-  editing: boolean = false;
-
-  constructor(
-    private router: Router ) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
-
-  /*editNote(){
-    this.editing = !this.editing;
-    this.selected.emit( { state: this.editing, data: null } );
-  }*/
-
 
 }

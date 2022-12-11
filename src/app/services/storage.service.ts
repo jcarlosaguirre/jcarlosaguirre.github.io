@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import Note from "../pages/notes/models/Note";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class StorageService {
   constructor() { }
 
   setIntoLocalStorage( key: string, value: any ){
-    localStorage.setItem( key, value );
+    localStorage.setItem( key, JSON.stringify( value ) );
     this.updateStorage.next( this.getFromLocalStorage( key ) );
   }
 
@@ -22,6 +23,16 @@ export class StorageService {
   }
 
   getFromLocalStorage( key: string ){
-    return localStorage.getItem( key )
+    let data = localStorage.getItem( key );
+    if ( data ) return JSON.parse( data );
+    return undefined;
+  }
+
+  getLocalStorageNotes(): Note[]{
+    let data = localStorage.getItem( 'notesList' );
+    if ( data ) {
+      return JSON.parse( data ) as Note[];
+    }
+    return [];
   }
 }

@@ -3,10 +3,9 @@ import { Subscription } from 'rxjs';
 import {NotesService} from "../services/notes.service";
 import Note from "../models/Note";
 import {
-  faCirclePlus,
   faFileArrowUp,
   faFileCirclePlus,
-  faFileExport
+  faFileExport, faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -20,7 +19,9 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
   subscriptions: Subscription;
   blockScreen: boolean = false;
 
+
   notes: Note[];
+
   addNewIcon = faFileCirclePlus;
   exportIcon = faFileExport;
   importIcon = faFileArrowUp;
@@ -30,50 +31,12 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
     private storageService: StorageService )
   {
     this.subscriptions = new Subscription();
-
     this.notes = [];
   }
 
   ngOnInit(): void {
 
-    this.notes = [
-      new Note("1",
-        'First note',
-        'Eget felis graeci nec sadipscing conceptam consectetuer vulputate. Ea expetendis purus ocurreret vocent tota discere indoctum. Vel orci quaerendum explicari penatibus melius deserunt dicunt.'
-      ),
-      new Note("2",
-        'Second note',
-        'Metus risus repudiandae ad ultricies gubergren fuisset mucius volutpat. Mollis lacus reformidans suspendisse offendit instructior tractatos habitant veritus ridens. Suscipit vix praesent accumsan erroribus inimicus sollicitudin noster nec delicata. Appareat gloriatur mollis antiopam dico alterum graeci. Iudicabit posse nisi laoreet fabellas leo tincidunt mattis dolorum.'
-      ),
-      new Note("3",
-        'Third note',
-        'Omnesque his quot qualisque urbanitas reque regione.'
-      ),
-      new Note("3",
-        'Third note',
-        'Third note content'
-      ),
-      new Note("3",
-        'Third note',
-        'Netus non menandri dignissim eius. Montes signiferumque mel ludus invenire cubilia dapibus pretium. Quo sociosqu mus eos percipit minim.'
-      ),
-      new Note("3",
-        'Third note',
-        'Third note content'
-      ),
-      new Note("3",
-        'Third note',
-        'Third note content'
-      ),
-      new Note("3",
-        'Third note',
-        'Lobortis iudicabit posuere expetendis elementum varius. Vivendo no tincidunt posidonium elementum qui luctus delicata iudicabit. Vituperata posidonium numquam an efficiantur tempus noster. Etiam eros ancillae pro hac nec ad. Viverra ultrices wisi quot decore omnesque usu ignota quot.'
-      ),
-      new Note("3",
-        'Third note',
-        'Third note content'
-      ),
-    ]
+    this.notes = this.storageService.getLocalStorageNotes() || [];
 
     let screenSubscription = this.notesService.screenBlocker$.subscribe(
       ( status ) => {
@@ -86,12 +49,34 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
 
     let notesSubscription = this.notesService.updateNotes$.subscribe(
       ( notesData ) => {
-        console.log("updating")
-        this.notes[ notesData.position ].setTitle( notesData.data.title );
-        this.notes[ notesData.position ].setContent( notesData.data.content );
-        this.notes[ notesData.position ].update();
 
-        this.storageService.setIntoLocalStorage('notesList', this.notes)
+        if( notesData ) {
+          if( !notesData.delete ) {
+            let note: Note = new Note(
+              this.notes[ notesData.position ].id,
+              this.notes[ notesData.position ].title,
+              this.notes[ notesData.position ].content,
+            );
+
+            note.title = notesData.data.title;
+            note.content = notesData.data.content;
+            note.update();
+
+            this.notes.splice(notesData.position, 1);
+            this.notes = [
+              note,
+              ...this.notes
+            ];
+          }
+          else {
+            this.notes.splice(notesData.position, 1);
+            this.notes = [
+              ...this.notes
+            ];
+          }
+
+          this.storageService.setIntoLocalStorage('notesList', this.notes);
+        }
       },
       ( err ) => {
         console.error( err )
@@ -102,15 +87,29 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
     this.subscriptions.add( notesSubscription );
   }
 
+  createNote() {
+    this.notes = [
+      ...this.notes,
+      new Note(
+        (this.notes.length + 1).toString(),
+        "new Note",
+        "content"
+      )
+    ]
+
+    this.storageService.setIntoLocalStorage('notesList', this.notes);
+  }
+
+  importNotes() {
+
+  }
+
+  exportNotes() {
+
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 
-  addNote() {
-
-  }
-
-  export() {
-
-  }
 }

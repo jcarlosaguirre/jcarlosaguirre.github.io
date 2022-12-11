@@ -6,7 +6,7 @@ import {NotesLayoutComponent} from "./notes-layout/notes-layout.component";
 import {NotesListComponent} from "./components/notes-list/notes-list.component";
 import {NotesCardComponent} from "./components/notes-card/notes-card.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NotesFormComponent } from './components/notes-form/notes-form.component';
 import {NotesService} from "./services/notes.service";
 import {NgxMasonryModule} from "ngx-masonry";
@@ -28,7 +28,8 @@ import {SharedModule} from "../../shared/shared.module";
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxMasonryModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [
     NotesService,
