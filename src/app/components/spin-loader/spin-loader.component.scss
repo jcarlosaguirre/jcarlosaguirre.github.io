@@ -1,0 +1,13 @@
+
+
+.loader-container:not([hidden]) {
+  display: flex;
+
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    border-color: salmon;
+    border-left-color: transparent;
+  }
+}

@@ -12,6 +12,7 @@ import {NotesService} from "./services/notes.service";
 import {NgxMasonryModule} from "ngx-masonry";
 import {AnimationBuilder} from "@angular/animations";
 import {StorageService} from "../../services/storage.service";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {StorageService} from "../../services/storage.service";
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxMasonryModule,
+    SharedModule
   ],
   providers: [
     NotesService,

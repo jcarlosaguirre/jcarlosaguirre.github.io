@@ -12,7 +12,6 @@ import { SpinLoaderComponent } from './components/spin-loader/spin-loader.compon
   declarations: [
     AppComponent,
     TopbarComponent,
-    SpinLoaderComponent,
   ],
     imports: [
       BrowserModule,
