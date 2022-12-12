@@ -5,7 +5,7 @@ import Note from "../models/Note";
 import {
   faFileArrowUp,
   faFileCirclePlus,
-  faFileExport, faSearch,
+  faFileExport,
 } from "@fortawesome/free-solid-svg-icons";
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -101,11 +101,43 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
   }
 
   importNotes() {
+    let input = document.createElement('input');
+    input.type = 'file';
 
+    input.onchange = (e) => {
+
+      if( e.target ){
+        let target = e.target as HTMLInputElement;
+        let file = target.files!![0];
+
+        // setting up the reader
+        let reader = new FileReader();
+        reader.readAsText(file,'UTF-8');
+
+        // here we tell the reader what to do when it's done reading...
+        reader.onload = readerEvent => {
+          let content = readerEvent.target!!.result; // this is the content!
+          this.notes = [
+            ...JSON.parse(content as string)
+          ]
+          this.storageService.setIntoLocalStorage('notesList', JSON.parse(content as string));        }
+      }
+    }
+
+    input.click();
   }
 
   exportNotes() {
+    let tempLink = document.createElement("a");
 
+    let notes = this.storageService.getFromLocalStorage('notesList');
+    let textBlob = new Blob([JSON.stringify(notes)], {type: 'application/json'});
+
+    tempLink.setAttribute('href', URL.createObjectURL(textBlob));
+    tempLink.setAttribute('download', `notes-export_${new Date().getMilliseconds()}.json`);
+    tempLink.click();
+
+    URL.revokeObjectURL(tempLink.href);
   }
 
   ngOnDestroy() {

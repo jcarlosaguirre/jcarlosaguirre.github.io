@@ -18,7 +18,7 @@
 <!--    <ngx-masonry [options]="{ itemSelector: 'note' }" #NgxMasonryComponent>-->
       <app-notes-card *ngFor="let note of filteredNotes, let i = index"
                       [noteData]="note" (click)="editNote( {state: true, data: note, delete: false}, i )"
-                      class="note col-12 col-md-6 col-xl-4 p-0"></app-notes-card>
+                      class="note col-12 col-md-8 col-lg-6 col-xxl-4 p-0"></app-notes-card>
 <!--    </ngx-masonry>-->
 
     <div class="notes-editor-wrapper p-3 start-50 top-50 translate-middle" [ngClass]="{'active': showEditor}" >
