@@ -1,6 +1,10 @@
 .notes-container {
   display: grid;
   grid-template-rows: auto 75vh auto;
+
+  h3 {
+    letter-spacing: -0.5pt;
+  }
 }
 
 .screenBlocker {

@@ -79,13 +79,13 @@ export class NotesListComponent implements OnInit, OnChanges {
       this.reloadNotes = true;
       setTimeout( () => {
         this.reloadNotes = false;
-      }, 1000)
+      }, (e.state && !e.delete) ? 1000:0)
 
       this.showEditor = false;
-      setTimeout( () => {
+      // setTimeout( () => {
         this.selectedNote.note = null;
         this.notesService.blockScreen( false );
-      },500)
+      // },500)
     }
     else{
 
