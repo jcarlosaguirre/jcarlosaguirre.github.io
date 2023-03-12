@@ -118,6 +118,7 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
         reader.onload = readerEvent => {
           let content = readerEvent.target!!.result; // this is the content!
           this.notes = [
+            ...this.notes,
             ...JSON.parse(content as string)
           ]
           this.storageService.setIntoLocalStorage('notesList', JSON.parse(content as string));        }

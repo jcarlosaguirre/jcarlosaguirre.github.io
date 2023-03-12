@@ -7,6 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SpinLoaderComponent implements OnInit {
 
+  @Input('spinnerColor') spinnerColor?: string;
+
   constructor() { }
 
   ngOnInit(): void {

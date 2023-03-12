@@ -99,7 +99,8 @@ export class NotesListComponent implements OnInit, OnChanges {
   filterNotesBySearch(e: KeyboardEvent){
     if( this.searchValue.length == 0 ) this.filteredNotes = [ ...this.notesList ];
     this.filteredNotes = this.notesList.filter(note => {
-      return note.title?.includes( this.searchValue ) || note.content?.includes( this.searchValue )
+      return note.title?.toLowerCase().includes( this.searchValue.toLowerCase() ) ||
+             note.content?.toLowerCase().includes( this.searchValue.toLowerCase() )
     })
   }
 

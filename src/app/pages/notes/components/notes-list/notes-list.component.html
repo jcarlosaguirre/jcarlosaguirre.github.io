@@ -10,7 +10,7 @@
     <h5 [hidden]="notesList.length > 0" class="text-center text-secondary">Create notes with button below </h5>
   </div>
 
-  <app-spin-loader [hidden]="!reloadNotes"></app-spin-loader>
+  <app-spin-loader [spinnerColor]="'salmon'" [hidden]="!reloadNotes"></app-spin-loader>
 
   <div class="note-list-wrapper flex-md-column row px-0"  [hidden]="reloadNotes || notesList.length == 0">
       <app-notes-card *ngFor="let note of filteredNotes, let i = index"
