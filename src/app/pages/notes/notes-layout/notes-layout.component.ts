@@ -36,7 +36,7 @@ export class NotesLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.notes = this.storageService.getLocalStorageNotes() || [];
+    this.notes = this.storageService.getFromLocalStorage('notesList') || [];
 
     let screenSubscription = this.notesService.screenBlocker$.subscribe(
       ( status ) => {

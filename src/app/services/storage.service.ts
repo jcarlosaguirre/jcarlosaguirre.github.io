@@ -27,12 +27,4 @@ export class StorageService {
     if ( data ) return JSON.parse( data );
     return undefined;
   }
-
-  getLocalStorageNotes(): Note[]{
-    let data = localStorage.getItem( 'notesList' );
-    if ( data ) {
-      return JSON.parse( data ) as Note[];
-    }
-    return [];
-  }
 }
